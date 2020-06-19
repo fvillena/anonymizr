@@ -70,8 +70,9 @@ class TestAnonymizer(unittest.TestCase):
             self.new_df.blank2.isna().all()
         )
     def test_date_not_equal(self):
-        self.assertFalse(
-            (test_df.date1 == self.new_df.date1).all()
+        assert_series_not_equal(
+            test_df.date1,
+            self.new_df.date1
         )
     def test_date_difference_equal(self):
         pd.testing.assert_series_equal(
