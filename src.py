@@ -4,6 +4,7 @@ import hashlib
 import functools
 import pathlib
 import warnings
+import os
 
 def hasher(x,salt,result):
     if pd.isnull(x):
@@ -41,3 +42,14 @@ def load_dataset(dataset_location):
     else:
         raise NotImplementedError
     return df
+
+def save_dataset(dataset_location,df):
+    path = pathlib.Path(dataset_location)
+    new_name = "anonym_" + path.name
+    new_path = os.path.join(path.parent,new_name)
+    if path.suffix == ".xlsx":
+        df.to_excel(new_path,index=False)
+    elif path.suffix == ".csv":
+        df.to_csv(new_path,index=False)
+    else:
+        raise NotImplementedError
