@@ -79,6 +79,10 @@ class TestAnonymizer(unittest.TestCase):
             (pd.to_datetime(test_df.date2, errors="coerce") - pd.to_datetime(test_df.date1, errors="coerce")), 
             (self.new_df.date2 - self.new_df.date1)
         )
+    def test_missing_columns(self):
+        src.anonymize(test_df,"identifier1",[],["blank1","blank2"],["date1","date2"],"test")
+        src.anonymize(test_df,"identifier1",["identifier1","identifier2"],[],["date1","date2"],"test")
+        src.anonymize(test_df,"identifier1",["identifier1","identifier2"],["blank1","blank2"],[],"test")
 class TestLoader(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
