@@ -36,6 +36,8 @@ def load_dataset(dataset_location):
             warnings.filterwarnings("ignore", category=PendingDeprecationWarning)
             warnings.filterwarnings("ignore", category=DeprecationWarning)
             df = pd.read_excel(path,dtype=object)
-    if path.suffix == ".csv":
+    elif path.suffix == ".csv":
         df = pd.read_csv(path,dtype=object)
+    else:
+        raise NotImplementedError
     return df
